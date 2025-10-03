@@ -33,7 +33,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[400px] sm:min-h-[500px] md:min-h-[600px] flex items-center justify-center hero-gradient text-white overflow-hidden">
+    <section className="relative min-h-[500px] sm:min-h-[600px] md:min-h-[700px] lg:min-h-[600px] flex items-center justify-center hero-gradient text-white overflow-hidden">
       {/* Background Image */}
       {settings.hero_background && (
         <div className="absolute inset-0">
@@ -55,10 +55,10 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in leading-tight drop-shadow-lg">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 animate-fade-in leading-tight drop-shadow-lg">
             {content.title}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-white/95 animate-fade-in-delay leading-relaxed drop-shadow-md">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 text-white/95 animate-fade-in-delay leading-relaxed drop-shadow-md">
             {content.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-delay-2">
