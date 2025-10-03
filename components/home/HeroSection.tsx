@@ -33,7 +33,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[500px] sm:min-h-[600px] md:min-h-[700px] lg:min-h-[600px] flex items-center justify-center hero-gradient text-white overflow-hidden">
+    <section className="relative min-h-[85vh] sm:min-h-[80vh] md:min-h-[75vh] lg:min-h-[600px] flex items-center justify-center hero-gradient text-white overflow-hidden">
       {/* Background Image */}
       {settings.hero_background && (
         <div className="absolute inset-0">
