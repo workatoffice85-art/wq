@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Menu, X, Search, ShoppingCart, User, Settings } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
@@ -10,9 +10,27 @@ import { useSiteSettings } from '@/hooks/useSiteSettings'
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const userMenuRef = useRef<HTMLDivElement>(null)
   const { user, profile, signOut, isAdmin } = useAuth()
   const itemsCount = useCartStore((state) => state.getItemsCount())
   const { settings } = useSiteSettings()
+
+  // Close user menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setUserMenuOpen(false)
+      }
+    }
+
+    if (userMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [userMenuOpen])
 
   const navLinks = [
     { href: '/', label: 'الرئيسية' },
@@ -25,7 +43,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 sm:h-18 items-center justify-between">
+        <div className="flex h-16 sm:h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             {settings.site_logo && settings.site_logo !== '' && settings.site_logo !== '/logo.svg' && (
@@ -85,7 +103,7 @@ export default function Header() {
             </Link>
 
             {/* User Menu */}
-            <div className="relative">
+            <div className="relative" ref={userMenuRef}>
               <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className="flex items-center gap-2 rounded-lg bg-gray-100 px-2 py-2 sm:px-3"
@@ -104,12 +122,14 @@ export default function Header() {
                       <Link
                         href="/account"
                         className="block px-4 py-2 text-sm hover:bg-gray-50"
+                        onClick={() => setUserMenuOpen(false)}
                       >
                         حسابي
                       </Link>
                       <Link
                         href="/account/orders"
                         className="block px-4 py-2 text-sm hover:bg-gray-50"
+                        onClick={() => setUserMenuOpen(false)}
                       >
                         طلباتي
                       </Link>
@@ -117,13 +137,17 @@ export default function Header() {
                         <Link
                           href="/admin"
                           className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 border-t"
+                          onClick={() => setUserMenuOpen(false)}
                         >
                           <Settings className="h-4 w-4" />
                           لوحة التحكم
                         </Link>
                       )}
                       <button
-                        onClick={() => signOut()}
+                        onClick={() => {
+                          signOut()
+                          setUserMenuOpen(false)
+                        }}
                         className="w-full text-right px-4 py-2 text-sm text-red-600 hover:bg-gray-50 border-t"
                       >
                         تسجيل الخروج
@@ -134,12 +158,14 @@ export default function Header() {
                       <Link
                         href="/auth/login"
                         className="block px-4 py-2 text-sm hover:bg-gray-50"
+                        onClick={() => setUserMenuOpen(false)}
                       >
                         تسجيل الدخول
                       </Link>
                       <Link
                         href="/auth/register"
                         className="block px-4 py-2 text-sm hover:bg-gray-50"
+                        onClick={() => setUserMenuOpen(false)}
                       >
                         إنشاء حساب
                       </Link>
