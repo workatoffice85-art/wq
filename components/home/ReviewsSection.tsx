@@ -26,31 +26,31 @@ export default function ReviewsSection() {
   ]
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-12 sm:py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
             آراء عملائنا
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600">
             تعرف على تجارب عملائنا الكرام
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {reviews.map((review) => (
             <div key={review.id} className="card">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-primary-500 font-bold text-lg">
+              <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary-100 flex items-center justify-center text-primary-500 font-bold text-base sm:text-lg flex-shrink-0">
                   {review.name.charAt(0)}
                 </div>
-                <div>
-                  <h4 className="font-semibold">{review.name}</h4>
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-semibold text-sm sm:text-base truncate">{review.name}</h4>
                   <div className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-4 w-4 ${
+                        className={`h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0 ${
                           i < review.rating
                             ? 'fill-yellow-400 text-yellow-400'
                             : 'text-gray-300'
@@ -60,7 +60,7 @@ export default function ReviewsSection() {
                   </div>
                 </div>
               </div>
-              <p className="text-gray-600">{review.comment}</p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{review.comment}</p>
             </div>
           ))}
         </div>

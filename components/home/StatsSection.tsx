@@ -57,22 +57,22 @@ export default function StatsSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-16 bg-primary-500 text-white">
+    <section ref={sectionRef} className="py-10 sm:py-12 md:py-16 bg-primary-500 text-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="flex justify-center mb-4">
-                <stat.icon className="h-12 w-12" />
+              <div className="flex justify-center mb-3 sm:mb-4">
+                <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12" />
               </div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2">
                 {isVisible ? (
                   <CountUp end={stat.value} suffix={stat.suffix} />
                 ) : (
                   '0'
                 )}
               </div>
-              <div className="text-lg opacity-90">{stat.label}</div>
+              <div className="text-sm sm:text-base md:text-lg opacity-90">{stat.label}</div>
             </div>
           ))}
         </div>
