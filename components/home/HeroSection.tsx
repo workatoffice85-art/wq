@@ -33,7 +33,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-[600px] flex items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-white overflow-hidden">
+    <section className="relative min-h-[400px] sm:min-h-[500px] md:min-h-[600px] flex items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-white overflow-hidden">
       {/* Background Image */}
       {settings.hero_background && (
         <div className="absolute inset-0">
@@ -55,13 +55,13 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in">
             {content.title}
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-white/90 animate-fade-in-delay">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-white/90 animate-fade-in-delay">
             {content.subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-delay-2">
             <Link href="/products" className="btn bg-white text-primary-500 hover:bg-gray-100">
               {content.buttonText}
             </Link>

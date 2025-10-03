@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: 'ألوميتال برو - الجودة والأناقة في منتجات الألوميتال',
   description: 'متخصصون في تصنيع وتركيب مطابخ وأبواب وشبابيك الألوميتال عالية الجودة',
   keywords: 'ألوميتال, مطابخ, أبواب, شبابيك, مصر',
+  viewport: 'width=device-width, initial-scale=1',
 }
 
 export default function RootLayout({

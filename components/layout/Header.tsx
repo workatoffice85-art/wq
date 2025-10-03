@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 sm:h-18 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             {settings.site_logo && settings.site_logo !== '' && settings.site_logo !== '/logo.svg' && (
@@ -76,7 +76,7 @@ export default function Header() {
 
             {/* Cart */}
             <Link href="/cart" className="relative">
-              <ShoppingCart className="h-6 w-6 text-gray-700" />
+              <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6 text-gray-700" />
               {itemsCount > 0 && (
                 <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent-500 text-xs text-white">
                   {itemsCount}
@@ -88,9 +88,9 @@ export default function Header() {
             <div className="relative">
               <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2"
+                className="flex items-center gap-2 rounded-lg bg-gray-100 px-2 py-2 sm:px-3"
               >
-                <User className="h-5 w-5" />
+                <User className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
 
               {userMenuOpen && (
@@ -152,7 +152,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden"
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100"
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -165,12 +165,12 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t py-4">
+          <nav className="md:hidden border-t py-4 bg-white">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block py-2 text-sm font-medium text-gray-700 hover:text-primary-500"
+                className="block py-3 px-2 text-sm font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}

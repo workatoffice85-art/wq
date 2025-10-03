@@ -6,37 +6,59 @@
   * {
     @apply border-gray-200;
   }
-  
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-gray-50 text-gray-900;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Responsive text scaling */
+  h1 { @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl; }
+  h2 { @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl; }
+  h3 { @apply text-lg sm:text-xl md:text-2xl lg:text-3xl; }
+  h4 { @apply text-base sm:text-lg md:text-xl lg:text-2xl; }
+  h5 { @apply text-sm sm:text-base md:text-lg lg:text-xl; }
+  h6 { @apply text-xs sm:text-sm md:text-base lg:text-lg; }
+
+  p {
+    @apply text-sm sm:text-base;
+    line-height: 1.6;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-medium transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 sm:px-6 sm:py-3 font-medium transition-all duration-200 text-sm sm:text-base;
+    min-height: 44px; /* Touch-friendly button height */
   }
-  
+
   .btn-primary {
     @apply bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700;
   }
-  
+
   .btn-secondary {
     @apply bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700;
   }
-  
+
   .btn-outline {
     @apply border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white;
   }
-  
+
   .card {
-    @apply rounded-xl bg-white p-6 shadow-sm transition-shadow hover:shadow-md;
+    @apply rounded-xl bg-white p-4 sm:p-6 shadow-sm transition-shadow hover:shadow-md;
   }
-  
+
   .input {
-    @apply w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-100;
+    @apply w-full rounded-lg border border-gray-300 px-3 py-2.5 sm:px-4 sm:py-3 outline-none transition-colors focus:border-primary-500 focus:ring-2 focus:ring-primary-100 text-sm sm:text-base;
+    min-height: 44px; /* Touch-friendly input height */
   }
-  
+
   .label {
     @apply mb-2 block text-sm font-medium text-gray-700;
   }
@@ -64,4 +86,29 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #2d5282;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Improve touch targets */
+  button, .btn, input, select, textarea {
+    min-height: 44px;
+  }
+
+  /* Better spacing on mobile */
+  .container {
+    @apply px-4;
+  }
+
+  /* Reduce animations on mobile for better performance */
+  * {
+    animation-duration: 0.3s !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }
