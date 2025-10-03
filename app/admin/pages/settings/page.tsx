@@ -1150,4 +1150,6 @@ export default function EditSettingsPage() {
       </div>
     </div>
   )
+    } 
+  }
 }
