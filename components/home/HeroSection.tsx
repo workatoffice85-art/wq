@@ -55,10 +55,10 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-4 py-8 sm:py-12 md:py-16 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 md:mb-10 animate-fade-in leading-tight drop-shadow-lg">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 animate-fade-in leading-tight drop-shadow-lg">
             {content.title}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 sm:mb-10 md:mb-12 text-white/95 animate-fade-in-delay leading-relaxed drop-shadow-md max-w-4xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 text-white/95 animate-fade-in-delay leading-relaxed drop-shadow-md max-w-4xl mx-auto">
             {content.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center animate-fade-in-delay-2">
