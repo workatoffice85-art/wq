@@ -131,9 +131,145 @@
   }
 }
 
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
+/* Admin Window Styles */
+.admin-window {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.window-title-bar {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-bottom: 1px solid #cbd5e1;
+  cursor: move;
+}
+
+.window-title-bar:hover {
+  background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+}
+
+.window-title-bar:active {
+  background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+}
+
+/* Window controls */
+.window-title-bar button {
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.window-title-bar button:hover {
+  transform: scale(1.1);
+}
+
+.window-title-bar button:active {
+  transform: scale(0.95);
+}
+
+/* Resize handle */
+.admin-window .resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  cursor: nw-resize;
+  background: linear-gradient(-45deg, transparent 30%, rgba(148, 163, 184, 0.5) 30%, rgba(148, 163, 184, 0.5) 40%, transparent 40%),
+              linear-gradient(45deg, transparent 30%, rgba(148, 163, 184, 0.5) 30%, rgba(148, 163, 184, 0.5) 40%, transparent 40%);
+}
+
+/* Z-index management for multiple windows */
+.admin-window:nth-child(2) { z-index: 1001; }
+.admin-window:nth-child(3) { z-index: 1002; }
+.admin-window:nth-child(4) { z-index: 1003; }
+.admin-window:nth-child(5) { z-index: 1004; }
+
+/* Focus states */
+.admin-window:focus-within {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* Admin window content styling */
+.admin-window .content {
+  background: #ffffff;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Ensure admin windows don't interfere with main layout */
+body.has-admin-windows {
+  overflow: hidden;
+}
+
+/* Mobile responsive for admin windows */
+@media (max-width: 768px) {
+  .admin-window {
+    width: 95vw !important;
+    height: 80vh !important;
+    left: 2.5vw !important;
+    top: 10vh !important;
+    max-width: none !important;
+    max-height: none !important;
   }
+
+  .window-title-bar {
+    padding: 8px 12px;
+    height: 36px;
+  }
+
+  .window-title-bar span {
+    font-size: 12px;
+  }
+
+  .window-title-bar button {
+    padding: 4px;
+  }
+
+  .admin-window .content {
+    padding: 12px;
+  }
+}
+
+/* Animation for window appearance */
+@keyframes windowFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.admin-window {
+  animation: windowFadeIn 0.2s ease-out;
+}
+
+/* Prevent text selection during drag */
+.admin-window.dragging,
+.admin-window.dragging * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Custom scrollbar for admin windows */
+.admin-window .content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-window .content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.admin-window .content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.admin-window .content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

@@ -4,6 +4,7 @@ import { Cairo } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import AdminWindowManager from '@/components/admin/AdminWindowManager'
 
 const cairo = Cairo({ 
   subsets: ['arabic'],
@@ -25,11 +26,13 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body className={cairo.className}>
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <AdminWindowManager>
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </AdminWindowManager>
         <Toaster 
           position="top-center"
           toastOptions={{

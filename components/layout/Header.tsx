@@ -128,20 +128,34 @@ export default function Header() {
                       </Link>
                       <Link
                         href="/account/orders"
-                        className="block px-4 py-2 text-sm hover:bg-gray-50"
+                        className="block px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                       >
                         طلباتي
                       </Link>
                       {isAdmin() && (
-                        <Link
-                          href="/admin"
-                          className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 border-t"
-                          onClick={() => setUserMenuOpen(false)}
-                        >
-                          <Settings className="h-4 w-4" />
-                          لوحة التحكم
-                        </Link>
+                        <>
+                          <Link
+                            href="/admin"
+                            className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                            onClick={() => setUserMenuOpen(false)}
+                          >
+                            <Settings className="h-4 w-4" />
+                            لوحة التحكم (صفحة)
+                          </Link>
+                          <button
+                            onClick={() => {
+                              if ((window as any).openAdminWindow) {
+                                (window as any).openAdminWindow('dashboard', 'لوحة التحكم')
+                              }
+                              setUserMenuOpen(false)
+                            }}
+                            className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors w-full text-right"
+                          >
+                            <Settings className="h-4 w-4" />
+                            لوحة التحكم (نافذة)
+                          </button>
+                        </>
                       )}
                       <button
                         onClick={() => {
@@ -202,6 +216,37 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+
+            {/* Admin Windows in Mobile Menu */}
+            {isAdmin() && (
+              <div className="border-t pt-4 mt-4">
+                <p className="px-2 text-xs font-medium text-gray-500 mb-2">نوافذ الإدارة</p>
+                <button
+                  onClick={() => {
+                    if ((window as any).openAdminWindow) {
+                      (window as any).openAdminWindow('dashboard', 'لوحة التحكم')
+                    }
+                    setMobileMenuOpen(false)
+                  }}
+                  className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors w-full text-right"
+                >
+                  <Settings className="h-4 w-4" />
+                  لوحة التحكم (نافذة)
+                </button>
+                <button
+                  onClick={() => {
+                    if ((window as any).openAdminWindow) {
+                      (window as any).openAdminWindow('settings', 'إعدادات النظام')
+                    }
+                    setMobileMenuOpen(false)
+                  }}
+                  className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-gray-700 hover:text-primary-500 hover:bg-gray-50 transition-colors w-full text-right"
+                >
+                  <Settings className="h-4 w-4" />
+                  إعدادات النظام (نافذة)
+                </button>
+              </div>
+            )}
           </nav>
         )}
       </div>
