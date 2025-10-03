@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Save, Eye, ArrowLeft, Upload, Palette } from 'lucide-react'
+import { Save, Eye, ArrowLeft, Upload, Palette, Type, Layout, Settings, Monitor, Smartphone } from 'lucide-react'
 import toast from 'react-hot-toast'
 import ImageUpload from '@/components/admin/ImageUpload'
 import { supabase } from '@/lib/supabase/client'
@@ -31,9 +31,65 @@ export default function EditSettingsPage() {
     // Colors
     primary_color: '#2563eb',
     secondary_color: '#1e40af',
+    accent_color: '#f59e0b',
+    background_color: '#ffffff',
+    text_color: '#1f2937',
+    border_color: '#e5e7eb',
+
+    // Typography
+    font_family_primary: 'Inter, sans-serif',
+    font_family_secondary: 'Cairo, sans-serif',
+    font_size_base: '16px',
+    font_size_small: '14px',
+    font_size_large: '18px',
+    font_size_h1: '2.5rem',
+    font_size_h2: '2rem',
+    font_size_h3: '1.75rem',
+    font_size_h4: '1.5rem',
+    font_size_h5: '1.25rem',
+    font_size_h6: '1.125rem',
+    line_height_base: '1.6',
+    line_height_heading: '1.2',
+
+    // Layout & Spacing
+    container_max_width: '1200px',
+    section_padding: '4rem',
+    element_spacing: '1rem',
+    border_radius: '0.5rem',
+    shadow_intensity: 'medium',
+
+    // Header
+    header_height: '4rem',
+    header_background: '#ffffff',
+    header_sticky: true,
 
     // Footer
     footer_text: '© 2024 ألوميتال برو. جميع الحقوق محفوظة.',
+    footer_background: '#1f2937',
+    footer_height: '3rem',
+
+    // Buttons
+    button_padding: '0.75rem 1.5rem',
+    button_border_radius: '0.5rem',
+    button_font_size: '1rem',
+    button_font_weight: '500',
+
+    // Cards
+    card_padding: '1.5rem',
+    card_border_radius: '0.75rem',
+    card_shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+
+    // Animations
+    animation_duration: '0.3s',
+    animation_easing: 'ease-in-out',
+    enable_animations: true,
+    enable_hover_effects: true,
+
+    // Responsive breakpoints
+    breakpoint_sm: '640px',
+    breakpoint_md: '768px',
+    breakpoint_lg: '1024px',
+    breakpoint_xl: '1280px',
 
     // Intro Video Settings
     intro_video_enabled: false,
@@ -317,18 +373,485 @@ export default function EditSettingsPage() {
             </div>
           </div>
 
-          {/* Footer */}
+          {/* Typography Settings */}
           <div className="bg-white rounded-xl p-6 shadow-sm">
-            <h3 className="font-bold text-lg mb-4">الفوتر</h3>
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <Type className="h-5 w-5" />
+              إعدادات الخطوط
+            </h3>
 
-            <div>
-              <label className="label">نص الفوتر</label>
-              <input
-                type="text"
-                value={settings.footer_text}
-                onChange={(e) => setSettings({ ...settings, footer_text: e.target.value })}
-                className="input"
-              />
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">نوع الخط الأساسي</label>
+                  <select
+                    value={settings.font_family_primary}
+                    onChange={(e) => setSettings({ ...settings, font_family_primary: e.target.value })}
+                    className="input"
+                  >
+                    <option value="Inter, sans-serif">Inter</option>
+                    <option value="Roboto, sans-serif">Roboto</option>
+                    <option value="Open Sans, sans-serif">Open Sans</option>
+                    <option value="Cairo, sans-serif">Cairo</option>
+                    <option value="Amiri, serif">Amiri</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="label">نوع الخط الثانوي</label>
+                  <select
+                    value={settings.font_family_secondary}
+                    onChange={(e) => setSettings({ ...settings, font_family_secondary: e.target.value })}
+                    className="input"
+                  >
+                    <option value="Cairo, sans-serif">Cairo</option>
+                    <option value="Inter, sans-serif">Inter</option>
+                    <option value="Roboto, sans-serif">Roboto</option>
+                    <option value="Amiri, serif">Amiri</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="label">حجم الخط الأساسي</label>
+                  <input
+                    type="text"
+                    value={settings.font_size_base}
+                    onChange={(e) => setSettings({ ...settings, font_size_base: e.target.value })}
+                    className="input"
+                    placeholder="16px"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">حجم الخط الصغير</label>
+                  <input
+                    type="text"
+                    value={settings.font_size_small}
+                    onChange={(e) => setSettings({ ...settings, font_size_small: e.target.value })}
+                    className="input"
+                    placeholder="14px"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">حجم الخط الكبير</label>
+                  <input
+                    type="text"
+                    value={settings.font_size_large}
+                    onChange={(e) => setSettings({ ...settings, font_size_large: e.target.value })}
+                    className="input"
+                    placeholder="18px"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="label">حجم H1</label>
+                  <input
+                    type="text"
+                    value={settings.font_size_h1}
+                    onChange={(e) => setSettings({ ...settings, font_size_h1: e.target.value })}
+                    className="input"
+                    placeholder="2.5rem"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">حجم H2</label>
+                  <input
+                    type="text"
+                    value={settings.font_size_h2}
+                    onChange={(e) => setSettings({ ...settings, font_size_h2: e.target.value })}
+                    className="input"
+                    placeholder="2rem"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">حجم H3</label>
+                  <input
+                    type="text"
+                    value={settings.font_size_h3}
+                    onChange={(e) => setSettings({ ...settings, font_size_h3: e.target.value })}
+                    className="input"
+                    placeholder="1.75rem"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Layout & Spacing Settings */}
+          <div className="bg-white rounded-xl p-6 shadow-sm">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <Layout className="h-5 w-5" />
+              التخطيط والمسافات
+            </h3>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="label">أقصى عرض للحاوي</label>
+                  <input
+                    type="text"
+                    value={settings.container_max_width}
+                    onChange={(e) => setSettings({ ...settings, container_max_width: e.target.value })}
+                    className="input"
+                    placeholder="1200px"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">حشو الأقسام</label>
+                  <input
+                    type="text"
+                    value={settings.section_padding}
+                    onChange={(e) => setSettings({ ...settings, section_padding: e.target.value })}
+                    className="input"
+                    placeholder="4rem"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">مسافة العناصر</label>
+                  <input
+                    type="text"
+                    value={settings.element_spacing}
+                    onChange={(e) => setSettings({ ...settings, element_spacing: e.target.value })}
+                    className="input"
+                    placeholder="1rem"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">انحناء الحواف</label>
+                  <input
+                    type="text"
+                    value={settings.border_radius}
+                    onChange={(e) => setSettings({ ...settings, border_radius: e.target.value })}
+                    className="input"
+                    placeholder="0.5rem"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="label">شدة الظلال</label>
+                <select
+                  value={settings.shadow_intensity}
+                  onChange={(e) => setSettings({ ...settings, shadow_intensity: e.target.value })}
+                  className="input"
+                >
+                  <option value="none">بدون ظلال</option>
+                  <option value="light">خفيفة</option>
+                  <option value="medium">متوسطة</option>
+                  <option value="heavy">ثقيلة</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Advanced Settings */}
+          <div className="bg-white rounded-xl p-6 shadow-sm">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <Settings className="h-5 w-5" />
+              إعدادات متقدمة
+            </h3>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Header Settings */}
+                <div className="space-y-3">
+                  <h4 className="font-semibold flex items-center gap-2">
+                    <Monitor className="h-4 w-4" />
+                    إعدادات الهيدر
+                  </h4>
+
+                  <div>
+                    <label className="label">ارتفاع الهيدر</label>
+                    <input
+                      type="text"
+                      value={settings.header_height}
+                      onChange={(e) => setSettings({ ...settings, header_height: e.target.value })}
+                      className="input"
+                      placeholder="4rem"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">لون خلفية الهيدر</label>
+                    <div className="flex gap-3">
+                      <input
+                        type="color"
+                        value={settings.header_background}
+                        onChange={(e) => setSettings({ ...settings, header_background: e.target.value })}
+                        className="w-16 h-12 rounded-lg border-2 cursor-pointer"
+                      />
+                      <input
+                        type="text"
+                        value={settings.header_background}
+                        onChange={(e) => setSettings({ ...settings, header_background: e.target.value })}
+                        className="input flex-1"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="header_sticky"
+                      checked={settings.header_sticky}
+                      onChange={(e) => setSettings({ ...settings, header_sticky: e.target.checked })}
+                      className="w-4 h-4 text-primary-600 rounded"
+                    />
+                    <label htmlFor="header_sticky" className="font-medium">هيدر ثابت</label>
+                  </div>
+                </div>
+
+                {/* Footer Settings */}
+                <div className="space-y-3">
+                  <h4 className="font-semibold flex items-center gap-2">
+                    <Layout className="h-4 w-4" />
+                    إعدادات الفوتر
+                  </h4>
+
+                  <div>
+                    <label className="label">ارتفاع الفوتر</label>
+                    <input
+                      type="text"
+                      value={settings.footer_height}
+                      onChange={(e) => setSettings({ ...settings, footer_height: e.target.value })}
+                      className="input"
+                      placeholder="3rem"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">لون خلفية الفوتر</label>
+                    <div className="flex gap-3">
+                      <input
+                        type="color"
+                        value={settings.footer_background}
+                        onChange={(e) => setSettings({ ...settings, footer_background: e.target.value })}
+                        className="w-16 h-12 rounded-lg border-2 cursor-pointer"
+                      />
+                      <input
+                        type="text"
+                        value={settings.footer_background}
+                        onChange={(e) => setSettings({ ...settings, footer_background: e.target.value })}
+                        className="input flex-1"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Button Settings */}
+              <div className="space-y-3">
+                <h4 className="font-semibold">إعدادات الأزرار</h4>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div>
+                    <label className="label">حشو الأزرار</label>
+                    <input
+                      type="text"
+                      value={settings.button_padding}
+                      onChange={(e) => setSettings({ ...settings, button_padding: e.target.value })}
+                      className="input"
+                      placeholder="0.75rem 1.5rem"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">انحناء الأزرار</label>
+                    <input
+                      type="text"
+                      value={settings.button_border_radius}
+                      onChange={(e) => setSettings({ ...settings, button_border_radius: e.target.value })}
+                      className="input"
+                      placeholder="0.5rem"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">حجم خط الأزرار</label>
+                    <input
+                      type="text"
+                      value={settings.button_font_size}
+                      onChange={(e) => setSettings({ ...settings, button_font_size: e.target.value })}
+                      className="input"
+                      placeholder="1rem"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">وزن خط الأزرار</label>
+                    <select
+                      value={settings.button_font_weight}
+                      onChange={(e) => setSettings({ ...settings, button_font_weight: e.target.value })}
+                      className="input"
+                    >
+                      <option value="400">عادي (400)</option>
+                      <option value="500">متوسط (500)</option>
+                      <option value="600">شبه عريض (600)</option>
+                      <option value="700">عريض (700)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Settings */}
+              <div className="space-y-3">
+                <h4 className="font-semibold">إعدادات الكروت</h4>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="label">حشو الكروت</label>
+                    <input
+                      type="text"
+                      value={settings.card_padding}
+                      onChange={(e) => setSettings({ ...settings, card_padding: e.target.value })}
+                      className="input"
+                      placeholder="1.5rem"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">انحناء الكروت</label>
+                    <input
+                      type="text"
+                      value={settings.card_border_radius}
+                      onChange={(e) => setSettings({ ...settings, card_border_radius: e.target.value })}
+                      className="input"
+                      placeholder="0.75rem"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">ظلال الكروت</label>
+                    <input
+                      type="text"
+                      value={settings.card_shadow}
+                      onChange={(e) => setSettings({ ...settings, card_shadow: e.target.value })}
+                      className="input"
+                      placeholder="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Animation Settings */}
+              <div className="space-y-3">
+                <h4 className="font-semibold">إعدادات الحركات والتأثيرات</h4>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="enable_animations"
+                      checked={settings.enable_animations}
+                      onChange={(e) => setSettings({ ...settings, enable_animations: e.target.checked })}
+                      className="w-4 h-4 text-primary-600 rounded"
+                    />
+                    <label htmlFor="enable_animations" className="font-medium">تفعيل الحركات</label>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      id="enable_hover_effects"
+                      checked={settings.enable_hover_effects}
+                      onChange={(e) => setSettings({ ...settings, enable_hover_effects: e.target.checked })}
+                      className="w-4 h-4 text-primary-600 rounded"
+                    />
+                    <label htmlFor="enable_hover_effects" className="font-medium">تفعيل تأثيرات التمرير</label>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="label">مدة الحركات</label>
+                    <input
+                      type="text"
+                      value={settings.animation_duration}
+                      onChange={(e) => setSettings({ ...settings, animation_duration: e.target.value })}
+                      className="input"
+                      placeholder="0.3s"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">نوع الحركة</label>
+                    <select
+                      value={settings.animation_easing}
+                      onChange={(e) => setSettings({ ...settings, animation_easing: e.target.value })}
+                      className="input"
+                    >
+                      <option value="ease-in-out">ease-in-out</option>
+                      <option value="ease-in">ease-in</option>
+                      <option value="ease-out">ease-out</option>
+                      <option value="linear">linear</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Responsive Breakpoints */}
+              <div className="space-y-3">
+                <h4 className="font-semibold flex items-center gap-2">
+                  <Smartphone className="h-4 w-4" />
+                  نقاط التوقف المتجاوبة
+                </h4>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div>
+                    <label className="label">نقطة SM</label>
+                    <input
+                      type="text"
+                      value={settings.breakpoint_sm}
+                      onChange={(e) => setSettings({ ...settings, breakpoint_sm: e.target.value })}
+                      className="input"
+                      placeholder="640px"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">نقطة MD</label>
+                    <input
+                      type="text"
+                      value={settings.breakpoint_md}
+                      onChange={(e) => setSettings({ ...settings, breakpoint_md: e.target.value })}
+                      className="input"
+                      placeholder="768px"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">نقطة LG</label>
+                    <input
+                      type="text"
+                      value={settings.breakpoint_lg}
+                      onChange={(e) => setSettings({ ...settings, breakpoint_lg: e.target.value })}
+                      className="input"
+                      placeholder="1024px"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="label">نقطة XL</label>
+                    <input
+                      type="text"
+                      value={settings.breakpoint_xl}
+                      onChange={(e) => setSettings({ ...settings, breakpoint_xl: e.target.value })}
+                      className="input"
+                      placeholder="1280px"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
