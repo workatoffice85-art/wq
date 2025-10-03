@@ -104,6 +104,82 @@
   * {
     animation-duration: 0.3s !important;
   }
+
+  /* Enhanced colors for better contrast */
+  .text-primary-500 { color: #1e40af !important; }
+  .bg-primary-500 { background-color: #1e40af !important; }
+  .border-primary-500 { border-color: #1e40af !important; }
+
+  .text-primary-600 { color: #1d4ed8 !important; }
+  .bg-primary-600 { background-color: #1d4ed8 !important; }
+  .hover\:bg-primary-600:hover { background-color: #1d4ed8 !important; }
+
+  /* Better shadows and depth */
+  .card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Improved typography */
+  body {
+    font-weight: 400;
+    letter-spacing: 0.025em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Better button styling */
+  .btn {
+    font-weight: 500 !important;
+    letter-spacing: 0.025em;
+    text-transform: none;
+  }
+
+  /* Better input styling */
+  .input {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+}
+
+/* Enhanced mobile styles for better UX */
+@media (max-width: 768px) {
+  /* Remove complex animations for performance */
+  *, *::before, *::after {
+    animation-duration: 0.2s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Better touch targets */
+  button, .btn, a[role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Improved spacing */
+  section {
+    @apply py-12;
+  }
+
+  /* Better card styling */
+  .card {
+    @apply p-4;
+    border-radius: 12px !important;
+  }
+
+  /* Better shadows */
+  .shadow-sm {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Better focus states */
+  .focus\:ring-2:focus {
+    --tw-ring-offset-width: 2px;
+    --tw-ring-offset-color: #f3f4f6;
+  }
 }
 
 /* Print styles */

@@ -55,17 +55,17 @@ export default function HeroSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in leading-tight">
             {content.title}
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-white/90 animate-fade-in-delay">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-white/95 animate-fade-in-delay leading-relaxed">
             {content.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-delay-2">
-            <Link href="/products" className="btn bg-white text-primary-500 hover:bg-gray-100">
+            <Link href="/products" className="btn bg-white text-primary-600 hover:bg-gray-50 hover:text-primary-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               {content.buttonText}
             </Link>
-            <Link href="/contact" className="btn bg-white/10 backdrop-blur-sm text-white border-2 border-white hover:bg-white/20">
+            <Link href="/contact" className="btn bg-white/15 backdrop-blur-sm text-white border-2 border-white/30 hover:bg-white/25 hover:border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
               اتصل بنا
             </Link>
           </div>
