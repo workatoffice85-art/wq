@@ -71,8 +71,8 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation - Hidden on Mobile */}
-          <nav className="hidden lg:flex items-center gap-6">
+          {/* Desktop Navigation - Properly Hidden on Mobile */}
+          <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -84,8 +84,105 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Actions Section - Mobile Optimized */}
-          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+          {/* Actions Section - Desktop Optimized */}
+          <div className="hidden md:flex items-center gap-4 flex-shrink-0">
+            {/* Search - Desktop Version */}
+            <button className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-sm hover:bg-gray-200 transition-colors">
+              <Search className="h-4 w-4" />
+              <span>بحث...</span>
+            </button>
+
+            {/* Cart */}
+            <Link href="/cart" className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <ShoppingCart className="h-6 w-6 text-gray-700" />
+              {itemsCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent-500 text-xs text-white">
+                  {itemsCount > 9 ? '9+' : itemsCount}
+                </span>
+              )}
+            </Link>
+
+            {/* User Menu - Desktop Version */}
+            <div className="relative" ref={userMenuRef}>
+              <button
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 hover:bg-gray-200 transition-colors"
+              >
+                <User className="h-5 w-5" />
+                {user && (
+                  <span className="text-sm font-medium">
+                    {profile?.full_name?.split(' ')[0] || 'مستخدم'}
+                  </span>
+                )}
+              </button>
+
+              {userMenuOpen && (
+                <div className="absolute left-0 mt-2 w-56 rounded-lg bg-white shadow-lg border z-50">
+                  {user ? (
+                    <>
+                      <div className="border-b px-4 py-3">
+                        <p className="text-sm font-medium">{profile?.full_name || 'مستخدم'}</p>
+                        <p className="text-xs text-gray-500">{user.email}</p>
+                      </div>
+                      <Link
+                        href="/account"
+                        className="block px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        حسابي
+                      </Link>
+                      <Link
+                        href="/account/orders"
+                        className="block px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        طلباتي
+                      </Link>
+                      {isAdmin() && (
+                        <Link
+                          href="/admin"
+                          className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 border-t transition-colors"
+                          onClick={() => setUserMenuOpen(false)}
+                        >
+                          <Settings className="h-4 w-4" />
+                          لوحة التحكم
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => {
+                          signOut()
+                          setUserMenuOpen(false)
+                        }}
+                        className="w-full text-right px-4 py-2 text-sm text-red-600 hover:bg-gray-50 border-t transition-colors"
+                      >
+                        تسجيل الخروج
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/auth/login"
+                        className="block px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        تسجيل الدخول
+                      </Link>
+                      <Link
+                        href="/auth/register"
+                        className="block px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        إنشاء حساب
+                      </Link>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile Actions Section */}
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 md:hidden">
             {/* Search - Hidden on Small Mobile */}
             <button className="hidden sm:flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-sm hover:bg-gray-200 transition-colors">
               <Search className="h-4 w-4" />
@@ -183,7 +280,7 @@ export default function Header() {
             {/* Mobile Menu Button - Better Positioning */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
               aria-label="القائمة"
             >
               {mobileMenuOpen ? (
