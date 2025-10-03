@@ -114,9 +114,17 @@
   .bg-primary-600 { background-color: #1d4ed8 !important; }
   .hover\:bg-primary-600:hover { background-color: #1d4ed8 !important; }
 
+  .text-primary-700 { color: #1e3a8a !important; }
+  .bg-primary-700 { background-color: #1e3a8a !important; }
+
   /* Better shadows and depth */
   .card {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Advanced gradient backgrounds */
+  .hero-gradient {
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 25%, #1e3a8a 50%, #1d4ed8 75%, #1e40af 100%) !important;
   }
 
   /* Improved typography */
@@ -127,16 +135,45 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    text-rendering: optimizeLegibility;
+  }
+
   /* Better button styling */
   .btn {
     font-weight: 500 !important;
     letter-spacing: 0.025em;
     text-transform: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn:hover::before {
+    left: 100%;
   }
 
   /* Better input styling */
   .input {
     font-size: 16px !important; /* Prevents zoom on iOS */
+    transition: all 0.2s ease-in-out;
+  }
+
+  .input:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
   }
 }
 
@@ -179,6 +216,41 @@
   .focus\:ring-2:focus {
     --tw-ring-offset-width: 2px;
     --tw-ring-offset-color: #f3f4f6;
+  }
+
+  /* Advanced card hover effects */
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better selection */
+  ::selection {
+    background-color: #1e40af;
+    color: white;
+  }
+
+  /* Improved scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1e40af, #1d4ed8);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
   }
 }
 
